@@ -1,11 +1,36 @@
 import React from 'react';
-import {useEffect, useEffent,useState} from 'react';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { DevTool } from "@hookform/devtools";
 
-export default function Handover(){
-    return(
-        <h1>this is for handover</h1>
+let renderCount = 0;
+
+export default function Handover() {
+    const form = useForm();
+    const { register, control, handleSubmit } = form;
+
+    const onSubmit = (data, event) => {
+        event.preventDefault(); // Prevent form submission
+        console.log('form submitted', data);
+    };
+
+    renderCount++;
+    return (
+        <div>
+            <h1>this is for handover</h1>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <label htmlFor='name'>first name</label>
+                <input type='text' id='firstname' {...register("firstname")} />
+
+                <label htmlFor='name'>last name</label>
+                <input type='text' id='lastname' {...register("lastname")} />
+
+                <label htmlFor='name'>email</label>
+                <input type='text' id='email' {...register("email")} />
+
+                <button className='bg-red-300' type='submit'>submit</button>
+            </form>
+            <DevTool control={control} />
+        </div>
     );
-
-
-
 }
