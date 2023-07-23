@@ -5,12 +5,18 @@ import { DevTool } from "@hookform/devtools";
 
 let renderCount = 0;
 
+type FormValues  = {
+    firstname :String;
+    lastname:String;
+    email:String;
+}
+
 export default function Handover() {
-    const form = useForm();
+    const form = useForm<FormValues>();
     const { register, control, handleSubmit } = form;
 
-    const onSubmit = (data, event) => {
-        event.preventDefault(); // Prevent form submission
+    const onSubmit = (data:FormValues) => {
+        
         console.log('form submitted', data);
     };
 

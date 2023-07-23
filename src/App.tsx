@@ -1,7 +1,7 @@
 
 import './App.css';
 import { useForm } from 'react-hook-form';
-import {useEffect, useEffent,useState} from 'react';
+import {useEffect,useState} from 'react';
 import InfoTable  from './pages/InfoTable';
 import React from 'react';
 import NavBar from './Navbar';
