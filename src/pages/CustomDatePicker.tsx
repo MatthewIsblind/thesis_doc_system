@@ -25,6 +25,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ control, name }) =>
           }}
           dateFormat="dd/MM/yyyy"
           showMonthDropdown
+          isClearable
           showYearDropdown
           dropdownMode="select"
         />

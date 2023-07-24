@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -6,24 +6,32 @@ import { DevTool } from "@hookform/devtools";
 import CustomDatePicker from './CustomDatePicker';
 
 interface FormData {
-    dateOfBirth :Date;
-    dateOfAdmission : Date;
-    pFirstName: string;
-    pLastName: string;
+    patientFirstName: string;
+    patientLastName: string;
     gender: string;
-    kin_name: string;
-    Emergency_contact_number: string;
+    roomNumber : Int16Array;
+    bedNumber : Int16Array;
+    dateOfBirth :Date |null ;
+    dateOfAdmission : Date | null;
+    
+    
+    kinName: string;
+    EmergencyContactNumber: string;
     
 }
 
 const UpdatePatientInfo: React.FC = () => {
-  const possible_user = {
-    email: "mat@gmail.com",
-    password: "123"
-  };
+
 
   const [dateOfAdmission, setDateOfAdmission] = useState<Date | null>(null);
   const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null);
+
+
+  useEffect(() => {
+    setDateOfAdmission(null);
+    setDateOfBirth(null);
+  }, []);
+
 
   const handleAdmissionDateChange = (date: Date) => {
     if (date) {
@@ -58,20 +66,20 @@ const UpdatePatientInfo: React.FC = () => {
                         
                         <div className="mt-10 grid grid-cols-1 gap-x-2 gap-y-5 lg:grid-cols-6 px-5">
                             <div className="sm:col-span-3">
-                            <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">First name</label>
+                            <label htmlFor="patientFirstName" className="block text-sm font-medium leading-6 text-gray-900">First name</label>
                             <div className="mt-2">
-                                <input type="text" {...register("pFirstName")} id="pFirstName" autoComplete="given-name" className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" {...register("patientFirstName")} id="patientFirstName" autoComplete="given-name" className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                             </div>
     
                             <div className="sm:col-span-3">
-                            <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">Last name</label>
+                            <label htmlFor="patientLastName" className="block text-sm font-medium leading-6 text-gray-900">Last name</label>
                             <div className="mt-2">
-                                <input type="text" {...register("pLastName")} id="pLastName" autoComplete="family-name" className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input type="text" {...register("patientLastName")} id="patientLastName" autoComplete="family-name" className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                             </div>
     
-                            <div className="sm:col-span-2">
+                            <div className="sm:col-span-3">
                             <label htmlFor="gender" className="block text-sm font-medium leading-6 text-gray-900">Gender</label>
                             <div className="mt-2">
                                 <select id="gender" {...register("gender")} autoComplete="gender" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
@@ -80,6 +88,17 @@ const UpdatePatientInfo: React.FC = () => {
                                 </select>
                             </div>
                             </div>
+
+                            <div className="sm:col-span-3">
+                            <label htmlFor="dateOfBirth" className="block text-sm font-medium leading-6 text-gray-900">
+                                Date of Birth
+                            </label>
+                            <div className="mt-2">
+                                <CustomDatePicker  control={control} name="dateOfBirth" />
+                            </div>
+                            </div>
+
+
 
                             <div className="sm:col-span-2">
                             <label htmlFor="dateOfAdmission" className="block text-sm font-medium leading-6 text-gray-900">
@@ -91,13 +110,21 @@ const UpdatePatientInfo: React.FC = () => {
                             </div>
 
                             <div className="sm:col-span-2">
-                            <label htmlFor="dateOfBirth" className="block text-sm font-medium leading-6 text-gray-900">
-                                Date of Birth
-                            </label>
+                            <label htmlFor="roomNumber" className="block text-sm font-medium leading-6 text-gray-900">Room Number</label>
                             <div className="mt-2">
-                                <CustomDatePicker  control={control} name="dateOfBirth" />
+                                <input type="text" {...register("roomNumber")} id="roomNumber" autoComplete="roomNumber" className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                             </div>
+
+
+                            <div className="sm:col-span-2">
+                            <label htmlFor="bedNumber" className="block text-sm font-medium leading-6 text-gray-900">Bed Number</label>
+                            <div className="mt-2">
+                                <input type="text" {...register("bedNumber")} id="bedNumber" autoComplete="bedNumber" className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                            </div>
+                            </div>
+
+                            
 
                         
                         </div>
@@ -112,7 +139,7 @@ const UpdatePatientInfo: React.FC = () => {
                             <div className="sm:col-span-3">
                             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Name for next of kin</label>
                             <div className="mt-2">
-                                <input id="kin_name" {...register("kin_name")} type="kin_name" autoComplete="kin_name" className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input id="kinName" {...register("kinName")} type="kinName" autoComplete="kinName" className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                             </div>
     
@@ -120,7 +147,7 @@ const UpdatePatientInfo: React.FC = () => {
                             <div className="sm:col-span-3">
                             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Emergency contact number </label>
                             <div className="mt-2">
-                                <input id="Emergency_contact_number" {...register("Emergency_contact_number")} type="Emergency_contact_number" autoComplete="Emergency_contact_number" className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input id="EmergencyContactNumber" {...register("EmergencyContactNumber")} type="EmergencyContactNumber" autoComplete="EmergencyContactNumber" className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                             </div>
                         </div>
