@@ -6,7 +6,14 @@ module.exports = {
    
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#035388',
+        secondary: '#9ca3af',
+        accent: '#AED9E0',
+        // You can add more custom colors here if needed
+      },
+    },
   },
   plugins: [],
   

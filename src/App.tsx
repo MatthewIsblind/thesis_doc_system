@@ -17,9 +17,9 @@ function App() {
         <div className='h-screen'>
           <NavBar />
           
-          <div className="bg-slate-300 px-10 h-full">
-            <div className="flex justify-center h-full">
-                <div className="bg-yellow-100 w-full lg:w-5/6 h-full">
+          <div className="bg-primary px-10 ">
+            <div className="flex justify-center ">
+                <div className="bg-secondary w-full lg:w-5/6 ">
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/InfoTable" element={<InfoTable />} />
