@@ -13,6 +13,7 @@ interface FormData {
     gender: string;
     kin_name: string;
     Emergency_contact_number: string;
+    
 }
 
 const UpdatePatientInfo: React.FC = () => {
@@ -49,7 +50,7 @@ const UpdatePatientInfo: React.FC = () => {
   };
   
   return(
-            <>
+            <div className='h-full'>
                 <h1>This is for updating the patient info</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="border-b border-gray-900/10 pb-12 px-5">
@@ -123,12 +124,13 @@ const UpdatePatientInfo: React.FC = () => {
                             </div>
                             </div>
                         </div>
+                        
                     </div>
                     
                     <button type="submit">Submit</button>
                     <DevTool control={control} />
                 </form>
-            </>
+            </div>
         );
 
 
